@@ -1,4 +1,20 @@
 # openkey-cps1
+---
+* [Overview](#overview)
+* [Supported C Boards](#supported-c-boards)
+* [Supported Games / B-XX Chips](#supported-games--b-xx-chips)
+  * [CPS 1](#cps1)
+  * [CPS 1.5](#cps15)
+  * [B-XX](#b-xx)
+* [Hardware](#hardware)
+  * [PCB Manufacturing](#pcb-manufacturing)
+  * [BOM](#bom)
+  * [Assembly](#assembly)
+* [Programming](#programming)
+  * [Hardware](#hardware-1)
+  * [Software](#software)
+* [CPS 1.5 Case](#cps-15-case)
+* [Reverting a modified C Board](#reverting-a-modified-c-board)
 
 ## Overview
 This is an opensource/hardware implementation of an on the fly CPS B-21 chip programmer that consists of a PCB that sits between CPS1/1.5 B and C boards.
