@@ -8,16 +8,6 @@
 #define SET_CLK2      PORTB.OUTSET = PIN0_bm
 #define CLR_CLK2      PORTB.OUTCLR = PIN0_bm
 
-/* old hardware rev has these 2 pins swapped
-// PIN 8 (PIN_B1) <=> CNB PIN 61
-#define SET_CLK2      PORTB.OUTSET = PIN1_bm
-#define CLR_CLK2      PORTB.OUTCLR = PIN1_bm
-
-// PIN 9 (PIN_B0) <=> CNB PIN 62
-#define SET_DATA      PORTB.OUTSET = PIN0_bm
-#define CLR_DATA      PORTB.OUTCLR = PIN0_bm
-*/
-
 // PIN 10 (PIN_A0) used for UPDI (ATtiny programming)
 
 // PIN 11 (PIN_A1) <=> CNA PIN 19
