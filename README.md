@@ -13,6 +13,7 @@
 * [Programming](#programming)
   * [Hardware](#hardware-1)
   * [Software](#software)
+* [CPS 1 Case](#cps-1-case)
 * [CPS 1.5 Case](#cps-15-case)
 * [Reverting a modified C Board](#reverting-a-modified-c-board)
 
