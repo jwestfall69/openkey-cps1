@@ -40,7 +40,9 @@ The following unmodified C Boards are supported
 
 ## Supported Games / B-XX Chips
 ---
-openkey-cps1 supports either having a 5 position switch or using solder jumpers for picking what to program into the B-21 Chip.   Below is a list of supported configurations/games and what switches/jumpers must be used for each.
+openkey-cps1 supports either having a 5 position switch or using solder jumpers for picking what to program into the B-21 Chip.  For the switch, ensure the switches are fully set.  You should hear a click sound as you change the position.
+
+ Below is a list of supported configurations/games and what switches/jumpers must be used for each.
 
 #### CPS1
 | Switch<br>12345 | Program ROM Labels | Game Name | Tested / Working |
@@ -107,7 +109,7 @@ The extra plastic prevents the connector from being inserted off-by-one.  An off
 Don't be fooled into thinking you don't need the extra plastic because you see the key. The bottom connector for example is too skinny for the key to actually prevent off-by-one insertion.  Ask me how I know ;)
 
 #### Assembly
-Nothing special required here.  Personally I do SMD first, the the 40p connectors.
+Nothing special required here.  Personally I do SMD first, then the 40p connectors.
 
 ## Programming
 ---
@@ -133,8 +135,13 @@ From there you need to configure the board/programming settings.  I've been usin
 
 ![arduino ide settings](images/arduino_ide_settings.jpg)
 
+## CPS 1 Case
+openkey-cps1 will not fit in the CPS 1 case.  As far as I know only Varith and Capcom World 2 came in a case.  You can still use openkey-cps1 to desuicide the C board.  Replace the battery then boot up the game with openkey-cps1 installed.  Verify it runs as expected, then power off, remove openkey-cps1 and reinstall the board in the case.
+
 ## CPS 1.5 Case
-I only have 1 cps 1.5 game (punisher), so my ability to test openkey-cps1 fitting inside the case is limited.  Its a tight fit height wise in my case, to the point where the pins that stick out of the C board are right at the point of touching the top of the case.  Be sure all boards in the stack are fully seated and don't force the top cover on if its not fitting.
+Installing openkey-cps1 in a CPS 1.5 case is a tight fit height wise.  The pins that stick out of the C board are at the point of touching the top of the case.  Be sure all boards in the stack are fully seated and don't force the top cover on if its not fitting.
+
+I'm looking into other connector types to help it fit better.
 
 ## Reverting a modified C Board
 Its pretty common to find one of the required C boards as having been modified to disable using the programmable configuration.  This forces them to use their default configuration.
