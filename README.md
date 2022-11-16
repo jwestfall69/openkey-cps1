@@ -1,6 +1,7 @@
 # openkey-cps1
 ---
 * [Overview](#overview)
+* [Project Status](#project-status)
 * [Supported C Boards](#supported-c-boards)
 * [Supported Games / B-XX Chips](#supported-games--b-xx-chips)
   * [CPS 1](#cps1)
@@ -31,6 +32,12 @@ Details on *how* to program the B-21 chip configuration can be found in [Eduardo
 
 Details on *what* to program can be found in MAME's code for the [CPS1](https://github.com/mamedev/mame/blob/master/src/mame/capcom/cps1_v.cpp#L470).
 
+## Project Status
+**PCB:** I would consider the design PCB done at this point.  I'm open to any input on changes/improvements as this is only my 2nd PCB design.
+
+**Firmware:** The firmware is down to getting all the games and B-xx chips tested.
+
+**Documentation:** I need to write up some docs on how best to deal with the height constraint of CPS 1.5 cases as its best to not use the standard 40pin male connectors listed in the BOM.
 
 ## Supported C Boards
 The following unmodified C Boards are supported
