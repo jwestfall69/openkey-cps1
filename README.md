@@ -35,7 +35,7 @@ Details on *what* to program can be found in MAME's code for the [CPS1](https://
 ## Project Status
 **PCB:** I would consider the design PCB done at this point.  I'm open to any input on changes/improvements as this is only my 2nd PCB design.
 
-**Firmware:** The firmware is down to getting all the games and B-xx chips tested.
+**Firmware:** Need to get untested games tested
 
 **Documentation:** I need to write up some docs on how best to deal with the height constraint of CPS 1.5 cases as its best to not use the standard 40pin male connectors listed in the BOM.
 
@@ -47,7 +47,6 @@ The following unmodified C Boards are supported
 * [92641C-1](https://www.mvs-scans.com/index.php/CPS1_-_C_Board_92641C-1)
 
 ## Supported Games / B-XX Chips
----
 openkey-cps1 supports either having a 5 position switch or using solder jumpers for picking what to program into the B-21 Chip.  For the switch, ensure the switches are fully set.  You should hear a click sound as you change the position.
 
  Below is a list of supported configurations/games and what switches/jumpers must be used for each.
@@ -93,7 +92,6 @@ In B-XX chips prior to B-21 the configurations were hard coded into the chip.  I
 | 11001 | B-21 | YES |
 
 ## Hardware
----
 #### PCB Manufacturing
 There are no special requirements for manufacturing.
 
@@ -120,7 +118,6 @@ Don't be fooled into thinking you don't need the extra plastic because you see t
 Nothing special required here.  Personally I do SMD first, then the 40p connectors.
 
 ## Programming
----
 #### Hardware
 Programming is done with a UPDI programmer.  I've been using this one:
 
