@@ -123,6 +123,8 @@ Programming is done with a UPDI programmer.  I've been using this one:
 
 [Serial UPDI Programmer for ATmega 0-Series, or ATtiny 0-Series or 1-Series, or AVR DA or AVR DB](https://www.amazon.com/dp/B09X64YRLD?psc=1&ref=ppx_yo2ov_dt_b_product_details)
 
+Note: This programmer (and likely others) has a switch for 3.3V and 5V.  Set it to 5V.
+
 The openkey-cps1 programming port is setup so you can wedge the pins from the above programmer directly into them to programming.
 
 ![programming adapter](images/programming_adapter.jpg)
