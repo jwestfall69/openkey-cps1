@@ -56,11 +56,11 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 |:---------------:|:------------------:|-----------|:--------------:|
 | 00000 | CCE<br>CCJ<br>CCU<br> | Captain Commando | YES |
 | 00001 | KDE<br>KDJ<br>KDU | The King of Dragons | |
-| 00010 | KR_23E<br>KR_23J<br>KR_23U | Knights of the Round | YES |
+| 00010 | KR_23E<br>KR_23J<br>KR_23U | Knights of the Round | |
 | 00011 | Q5 | Capcom World 2 | YES |
 | 00100 | QDU | Quiz & Dragons | |
 | 00101 | RTE<br>RTJ<br>RTU | Three Wonders | YES |
-| 00110 | VAE<br>VAJ<br>VAU | Varth | YES |
+| 00110 | VAE<br>VAJ<br>VAU | Varth | |
 
 #### CPS1.5
 | Switch<br>12345 | Program ROM Labels | Game Name | Tested / Working |
@@ -69,19 +69,19 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 | 01000 | MBE<br>MBJ<br>MBU | Slam Masters / Muscle Bomber | |
 | 01001 | MBDE<br>MBDJ | Muscle Bomber Duo | |
 | 01010 | PSE<br>PSH<br>PSJ<br>PSU | Punisher | YES |
-| 01011 | TK2E<br>TK2J<br>TK2U | Warriors of Fate | YES |
+| 01011 | TK2E<br>TK2J<br>TK2U | Warriors of Fate | |
 
 #### B-XX
 In B-XX chips prior to B-21 the configurations were hard coded into the chip.  Its possible to program the B-21 to mimic these older chips.
 
 | Switch<br>12345 |  B-XX  | Tested / Working |
 |:---:|:------:|:---------------:|
-| 01100 | B-01 | |
+| 01100 | B-01 | YES |
 | 01101 | B-02 | |
 | 01110 | B-03 | |
 | 01111 | B-04 | |
 | 10000 | B-05 | |
-| 10001 | B-11 | |
+| 10001 | B-11 | YES |
 | 10010 | B-12 | YES |
 | 10011 | B-13 | YES |
 | 10100 | B-14 | YES |

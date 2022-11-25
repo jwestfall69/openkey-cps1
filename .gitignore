@@ -30,3 +30,5 @@ fp-info-cache
 
 # Exported gerber files
 hw-rev-*
+
+firmware/gen-cps1-configs/gen-cps1-configs
