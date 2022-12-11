@@ -67,7 +67,7 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 | 00011 | Q5 | Capcom World 2 | YES |
 | 00100 | QDU | Quiz & Dragons | YES |
 | 00101 | RTE<br>RTJ<br>RTU | Three Wonders | YES |
-| 00110 | VAE<br>VAJ<br>VAU | Varth | |
+| 00110 | VAE<br>VAJ<br>VAU | Varth | YES |
 
 #### CPS 1.5
 | Switch<br>12345 | Program ROM Labels | Game Name | Tested / Working |
@@ -88,7 +88,7 @@ Some older B-XX boards will have the number stamped on instead of etched into th
 | 01100 | B-01 | YES |
 | 01101 | B-02 | |
 | 01110 | B-03 | |
-| 01111 | B-04 | |
+| 01111 | B-04 | YES |
 | 10000 | B-05 | |
 | 10001 | B-11 | YES |
 | 10010 | B-12 | YES |
