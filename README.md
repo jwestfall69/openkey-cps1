@@ -63,7 +63,7 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 |:---------------:|:------------------:|-----------|:--------------:|
 | 00000 | CCE<br>CCJ<br>CCU<br> | Captain Commando | YES |
 | 00001 | KDE<br>KDJ<br>KDU | The King of Dragons | |
-| 00010 | KR_23E<br>KR_23J<br>KR_23U | Knights of the Round | |
+| 00010 | KR_23E<br>KR_23J<br>KR_23U | Knights of the Round | YES |
 | 00011 | Q5 | Capcom World 2 | YES |
 | 00100 | QDU | Quiz & Dragons | YES |
 | 00101 | RTE<br>RTJ<br>RTU | Three Wonders | YES |
@@ -72,7 +72,7 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 #### CPS 1.5
 | Switch<br>12345 | Program ROM Labels | Game Name | Tested / Working |
 |:---------------:|:------------------:|-----------|:--------------:|
-| 00111 | CDE<br>CDJ<br>CDT<br>CDU | Cadillacs & Dinosaurs | |
+| 00111 | CDE<br>CDJ<br>CDT<br>CDU | Cadillacs & Dinosaurs | YES |
 | 01000 | MBE<br>MBJ<br>MBU | Slam Masters / Muscle Bomber | YES |
 | 01001 | MBDE<br>MBDJ | Muscle Bomber Duo | |
 | 01010 | PSE<br>PSH<br>PSJ<br>PSU | Punisher | YES |
