@@ -12,18 +12,23 @@
   * [PCB Manufacturing](#pcb-manufacturing)
   * [BOM](#bom)
   * [Assembly](#assembly)
-      * [CPS 1](#cps-1-1)
-      * [CPS 1.5](#cps-15-1)
+    * [CPS 1](#cps-1-1)
+    * [CPS 1.5](#cps-15-1)
 * [Programming](#programming)
   * [Hardware](#hardware-1)
   * [Software](#software)
 * [Installation](#installation)
   * [CPS 1](#cps-1-2)
   * [CPS 1.5](#cps-15-2)
+  * [Reset Header (optional)](#reset-header-optional)
+    * [Reset Capacitor Locations](#reset-capacitor-locations)
+    * [Reset Signal Locations](#reset-signal-locations)
+    * [Reset Cable](#reset-cable)
+    * [Reset Delay Jumper](#reset-delay-jumper)
 * [Reverting a modified C Board](#reverting-a-modified-c-board)
 
 ## Overview
-This is an opensource/hardware implementation of an on the fly CPS B-21 chip programmer that consists of a PCB that sits between CPS1/1.5 B and C boards.
+This is an open source/hardware implementation of an on the fly CPS B-21 chip programmer that consists of a PCB that sits between CPS1/1.5 B and C boards.
 
 ![board pics](images/board_top.jpg) ![board pics](images/board_bottom.jpg)
 
@@ -37,11 +42,11 @@ Details on *how* to program the CPS B-21 chip configuration can be found in [Edu
 Details on *what* to program can be found in MAME's code for the [CPS1](https://github.com/mamedev/mame/blob/master/src/mame/capcom/cps1_v.cpp#L470).
 
 ## Project Status
-**PCB:** I would consider the design PCB done at this point.  I'm open to any input on changes/improvements as this is only my 2nd PCB design.
+**PCB:** Done
 
 **Firmware:** Need to get untested games tested
 
-**Documentation:** Mostly done
+**Documentation:** Done
 
 ## Supported C Boards
 The following unmodified C Boards are supported
@@ -58,7 +63,7 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 
  Below is a list of supported configurations/games and what switches/jumpers must be used for each.
 
-#### CPS 1
+### CPS 1
 | Switch<br>12345 | Program ROM Labels | Game Name | Tested / Working |
 |:---------------:|:------------------:|-----------|:--------------:|
 | 00000 | CCE<br>CCJ<br>CCU<br> | Captain Commando | YES |
@@ -69,7 +74,7 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 | 00101 | RTE<br>RTJ<br>RTU | Three Wonders | YES |
 | 00110 | VAE<br>VAJ<br>VAU | Varth | YES |
 
-#### CPS 1.5
+### CPS 1.5
 | Switch<br>12345 | Program ROM Labels | Game Name | Tested / Working |
 |:---------------:|:------------------:|-----------|:--------------:|
 | 00111 | CDE<br>CDJ<br>CDT<br>CDU | Cadillacs & Dinosaurs | YES |
@@ -78,7 +83,7 @@ openkey-cps1 supports either having a 5 position switch or using solder jumpers 
 | 01010 | PSE<br>PSH<br>PSJ<br>PSU | Punisher | YES |
 | 01011 | TK2E<br>TK2J<br>TK2U | Warriors of Fate | |
 
-#### B-XX
+### B-XX
 For B-XX chips prior to B-21 the configurations were hard coded into the chip.  Its possible to program the B-21 to mimic these older chips.
 
 Some older B-XX boards will have the number stamped on instead of etched into the chip.  These stamped numbers maybe incorrect.  For example I have a final fight board that has 04 stamped on as the XX number.  Picking B-04 on openkey-cps1 didn't work.  After dumping the program roms I was able to determine it was the ffightua romset.   [Mame](https://github.com/mamedev/mame/blob/master/src/mame/capcom/cps1_v.cpp#L1754) shows this romset actually uses B-01.  Switching to B-01 made the game work.
@@ -101,12 +106,12 @@ Some older B-XX boards will have the number stamped on instead of etched into th
 | 11001 | B-21 | YES |
 
 ## Hardware
-#### PCB Manufacturing
+### PCB Manufacturing
 There are no special requirements for manufacturing.
 
 I've been using [jlcpcb](https://jlcpcb.com/) for PCB manufacturing.  Just watch out that by default they will add an order number to the silk screen unless you tell them not to.
 
-#### BOM
+### BOM
 | Quantity | Description | Part Number | DigiKey | Mouser | Notes |
 |:----------:|-------------|-------------|---------|--------|-------|
 | 1 | ATtiny404 20Mhz | ATTINY404-SSN | [ATTINY404-SSN-ND](https://www.digikey.com/en/products/detail/microchip-technology/ATTINY404-SSN/9947546) | [556-ATTINY404-SSNR](https://www.mouser.com/ProductDetail/Microchip-Technology-Atmel/ATTINY404-SSNR?qs=F5EMLAvA7IAEqD7Aw0z%252B9Q%3D%3D) | Other ATtiny tinyAVR 0/1/2-series models should be viable as well.  The code compiles to just under 1.5K in size, so any that have 2k or more of flash should work.  Just note I have only tested with 404s |
@@ -123,11 +128,11 @@ The extra plastic prevents the connector from being inserted off-by-one.  An off
 
 Don't be fooled into thinking you don't need the extra plastic because you see the key. The bottom connector for example is too skinny for the key to actually prevent off-by-one insertion.  Ask me how I know ;)
 
-#### Assembly
-##### CPS 1
+### Assembly
+#### CPS 1
 Nothing special is needed when assembling a openkey-cps1 that will be used in a normal non-case'd CPS1 board.  Install SMD components first, then install the 40 pin male/female connectors.
 
-##### CPS 1.5
+#### CPS 1.5
 Installing openkey-cps1 in a CPS 1.5 case is a tight fit height wise.  The pins that stick out of the C board are at the point of touching the top of the case.  If you are ok with this just use the 40 pin IDE style connectors.  Otherwise you can do the following.
 
 To deal with this the best course of action is to only have raw pins for the male 40 pin connectors instead of ones with the plastic shroud.  This will allow the C board to sit flush with the openkey-cps1 board and reduce the height enough to not touch the top of the case.  Below is what has worked well for me, but there maybe better ways.
@@ -201,7 +206,9 @@ Install the SMD components and female 40 pin connectors.  This one was going on 
 ![cps15 finished](images/cps15_finished.jpg)
 
 ## Programming
-#### Hardware
+The latest firmware will work on both revisions of openkey-cps1 hardware.
+
+### Hardware
 Programming is done with a UPDI programmer.  I've been using this one:
 
 [Serial UPDI Programmer for ATmega 0-Series, or ATtiny 0-Series or 1-Series, or AVR DA or AVR DB](https://www.amazon.com/dp/B09X64YRLD?psc=1&ref=ppx_yo2ov_dt_b_product_details)
@@ -214,22 +221,22 @@ The openkey-cps1 programming port is setup so you can wedge the pins from the ab
 
 Of course be sure you properly orient the board so the labeled pin/holes match up.  vcc to vcc, gnd to gnd, and updi to updi.
 
-#### Software
-For software I've been using the [Arduino IDE](https://www.arduino.cc/en/software/OldSoftwareReleases) with [megaTinyCore](https://github.com/SpenceKonde/megaTinyCore), which adds support for tinyAVR 0/1/2-Series MCUs.
+### Software
+For software I've been using the [Arduino IDE](https://www.arduino.cc/en/software/) with [megaTinyCore](https://github.com/SpenceKonde/megaTinyCore), which adds support for tinyAVR 0/1/2-Series MCUs.
 
-**NOTE**: The makers of megaTinyCore currently recommend using Arduino IDE version 1.8.13 for best compatibility.  2.0 definitely does not work!
 
 To install the megaTinyCore you, should just need to add http://drazzy.com/package_drazzy.com_index.json to "Additional Boards Manager URLs" in the settings for the Arduino IDE.
 
 From there you need to configure the board/programming settings.  I've been using these:
 
 ![arduino ide settings](images/arduino_ide_settings.jpg)
+**NOTE:** The "Startup Time" was adjusted from my previous picture of the settings, from 0ms to 1ms.  In testing I found when using a 0ms startup there is a small chance the ATtiny won't even execute any code.
 
 ## Installation
-#### CPS 1
+### CPS 1
 Nothing really special here.  Use the dip switches or solder jumpers to pick your game/chip and put the openkey-cps1 board between your C and B boards.  The male/female connectors should prevent you from installing incorrectly.
 
-#### CPS 1.5
+### CPS 1.5
 This is assuming you are using an openkey-cps1 board with the raw pin headers on top.  There is nothing preventing you from install the C board incorrectly.
 
 Use the dip switches or solder jumpers to pick your game.
@@ -249,6 +256,47 @@ other side
 
 If its off by one of the sides will look like this
 ![cps15 install bad](images/cps15_install_bad.jpg)
+
+### Reset Header (optional)
+In openkey-cps1 hardware revision 2025-10-18 an optional reset header was added to allow hooking up openkey to the reset line of the A board.  Its **unlikley** you would need this and I would avoid using it.
+
+Openkey-cps1 is dependent on being able to re-program on the B-21 chip while the cps1 board is in reset.  This is because 2 of the pins related to programming are part of the data bus used by the main CPU to talk to the B-21 chip.  If openkey-cps1 were to try and do any of its programming outside of reset it would cause a bus conflict with the main CPU also trying to use those 2 pins and programming will fail.
+
+#### Reset Capacitor Locations
+The length of time the cps1 board is in reset is highly dependent on the reset capacitor located on the A board.  If this capacitor is faulty or going bad it can greatly reduce the amount of time the board is in reset when power is applied.  Before trying to use the reset header on the openkey-cps1 I would first try replacing the reset capacitor.
+
+**Long A Board:**<br>
+![long board reset cap location](images/long_board_reset_cap_location.jpg)
+
+**Short A Board:**<br>
+![short board reset cap location](images/short_board_reset_cap_location.jpg)
+
+On both boards its a 1uf/16V ceramic capacitor (higher voltages are ok).
+
+#### Reset Signal Locations
+The location provided for each A board type is a through hole.  I would advise installing a right angle header instead of directly soldering a wire.  This will make it easy to connect/disconnect the cable both on the A board and openkey-cps1.
+
+**Long A Board:**<br>
+![long board reset header location](images/long_board_reset_header_location.jpg)
+**Long A Board Installed:**<br>
+![long board reset header install](images/long_board_reset_header_installed.jpg)
+
+**Short A Board:**<br>
+![short board reset header location](images/short_board_reset_header_location.jpg)
+**Short A Board Installed:**<br>
+![short board reset header install](images/short_board_reset_header_installed.jpg)
+
+#### Reset Cable
+Once you've added the reset header on the A board, run a cable from it to pin 1 on the reset header of the openkey-cps1 as shown below.
+
+![reset line installed](images/reset_line_installed.jpg)
+
+Then install the C board onto openkey-cps1 as you normally would.
+
+#### Reset Delay Jumper
+With the reset cable hooked up, openkey-cps1 will hold the cps1 board in reset while its programming, then release when complete.  Pins 2 and 3 of the reset header on openkey-cps1 are a jumper that will cause openkey-cps1 to keep the cps1 board in reset longer.  When jumped the firmware will hold the cps1 board in reset for 1 second before and after programming.
+
+**IMPORTANT**: If this jumper is jumped and the reset cable is not hooked up, programming will fail 100% of the time!
 
 ## Reverting a modified C Board
 Its pretty common to find one of the required C boards as having been modified to disable using the programmable configuration.  This forces them to use their default configuration.

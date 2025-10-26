@@ -1,23 +1,30 @@
 #include <avr/sleep.h>
 #include "cps1-configs.h"
 
-// PIN 8 (PIN_B1) <=> CNB PIN 62
+// PIN 8 (PIN_PB1) <=> CNB PIN 62
 #define SET_DATA      PORTB.OUTSET = PIN1_bm
 #define CLR_DATA      PORTB.OUTCLR = PIN1_bm
 
-// PIN 9 (PIN_B0) <=> CNB PIN 61
+// PIN 9 (PIN_PB0) <=> CNB PIN 61
 #define SET_CLK2      PORTB.OUTSET = PIN0_bm
 #define CLR_CLK2      PORTB.OUTCLR = PIN0_bm
 
-// PIN 10 (PIN_A0) used for UPDI (ATtiny programming)
+// PIN 10 (PIN_PA0) used for UPDI (ATtiny programming)
 
-// PIN 11 (PIN_A1) <=> CNA PIN 19
+// PIN 11 (PIN_PA1) <=> CNA PIN 19
 #define SET_CLK1      PORTA.OUTSET = PIN1_bm
 #define CLR_CLK1      PORTA.OUTCLR = PIN1_bm
 
-// PIN 12 (PIN_A2) <=> CNA PIN 20
+// PIN 12 (PIN_PA2) <=> CNA PIN 20
 #define SET_SETUP     PORTA.OUTSET = PIN2_bm
 #define CLR_SETUP     PORTA.OUTCLR = PIN2_bm
+
+// PIN 13 (PIN_PA3) <=> "A" board reset line (optional)
+#define SET_RESET     PORTA.OUTSET = PIN3_bm
+#define CLR_RESET     PORTA.OUTCLR = PIN3_bm
+
+// reset delay jumper is jumped (hw rev 2025-10-18)
+#define RESET_DELAY !(PORTB.IN & 0b0000100)
 
 // doing bit shifting takes a variable amount
 // of time depending on the how far the shift
@@ -30,16 +37,25 @@ uint8_t masks[8] = {
 };
 
 void setup() {
-    // set the programming pins as outputs
-  PORTA.DIR = PIN1_bm | PIN2_bm;
+  // set the programming pins as outputs
+  PORTA.DIR = PIN1_bm | PIN2_bm | PIN3_bm;
   PORTB.DIR = PIN0_bm | PIN1_bm;
 
   // setup initial output states
   // https://www.youtube.com/watch?v=IBZc__9sM28&t=1196s
+  CLR_RESET;
   SET_SETUP;
   CLR_CLK1;
   CLR_CLK2;
   CLR_DATA;
+
+  // enable pull-ups on dsw / reset delay pins
+  PORTA.PIN4CTRL |= PORT_PULLUPEN_bm;  // PIN 2 (PIN_PA4) <=> DSW5
+  PORTA.PIN5CTRL |= PORT_PULLUPEN_bm;  // PIN 3 (PIN_PA5) <=> DSW4
+  PORTA.PIN6CTRL |= PORT_PULLUPEN_bm;  // PIN 4 (PIN_PA6) <=> DSW3
+  PORTA.PIN7CTRL |= PORT_PULLUPEN_bm;  // PIN 5 (PIN_PA7) <=> DSW2
+  PORTB.PIN3CTRL |= PORT_PULLUPEN_bm;  // PIN 6 (PIN_PB3) <=> DSW1
+  PORTB.PIN2CTRL |= PORT_PULLUPEN_bm;  // PIN 7 (PIN_PB2) <=> RESET_DELAY Jumper
 
   // Testing Notes:
   // - using a delay down near 500us will cause some games to report an
@@ -47,12 +63,9 @@ void setup() {
   // - going below that, programming stops working
   delayMicroseconds(1000);
 
-  // enable pull-ups on dsw pins
-  PORTA.PIN4CTRL |= PORT_PULLUPEN_bm;  // PIN 2 (PIN_PA4) <=> DSW5
-  PORTA.PIN5CTRL |= PORT_PULLUPEN_bm;  // PIN 3 (PIN_PA5) <=> DSW4
-  PORTA.PIN6CTRL |= PORT_PULLUPEN_bm;  // PIN 4 (PIN_PA6) <=> DSW3
-  PORTA.PIN7CTRL |= PORT_PULLUPEN_bm;  // PIN 5 (PIN_PA7) <=> DSW2
-  PORTB.PIN3CTRL |= PORT_PULLUPEN_bm;  // PIN 6 (PIN_PB3) <=> DSW1
+  if(RESET_DELAY) {
+    delay(1000);
+  }
 
   // stage #1: clocks on clock #1
   // https://www.youtube.com/watch?v=IBZc__9sM28&t=1232s
@@ -85,7 +98,11 @@ void setup() {
   CLR_CLK2;
   CLR_DATA;
   CLR_SETUP;
-  
+
+  if(RESET_DELAY) {
+    delay(1000);
+  }
+
   // NOTE: We dont connect pins 19/20 between the C and B boards.  These
   // pins are needed for programming but are normally tied to ground on
   // the B board.  In testing it appears the cps-b-21 chip has an internal
